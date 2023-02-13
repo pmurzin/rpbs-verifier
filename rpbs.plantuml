@@ -1,0 +1,16 @@
+@startuml
+autonumber
+participant Requester 
+participant Signer
+== Round 1 ==
+Requester -> Signer: public **info** and hidden **msg**
+Signer -> Signer: computes commitment **x** = { z1, a1, b1, a2, c2, s2, r1 }
+Signer -> Requester: commitment **x**
+== Round 2 ==
+Requester <- Requester: computes challenge\n**c** = { c, m1Hat, u1, v1, u2, v2, z1Hat, alpha, beta }
+Requester -> Signer: challenge **c**
+Signer -> Signer: solves challenge **c**; solution **s** = { c1, s1 }
+Signer -> Requester: solution **s**
+== Final ==
+Requester <- Requester: unblinds signature\n**p** = { z1Hat, c1Hat, s1Hat, c2Hat, s2Hat, alpha, beta }
+@enduml
